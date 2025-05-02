@@ -45,7 +45,7 @@ public class Pantalla_Iniciar_Sesion extends Pantalla_secundaria{
 			lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 			lblNewLabel_2.setForeground(Color.PINK);
 			lblNewLabel_2.setFont(new Font("Artifakt Element", Font.PLAIN, 14));
-			lblNewLabel_2.setBounds(676, 443, 286, 33);
+			lblNewLabel_2.setBounds(676, 465, 286, 33);
 			lblNewLabel_2.setVisible(false);
 			
 			JLabel lblband =new JLabel("Cuenta creada exitosamente,ahora inicia sesión :)");
@@ -141,6 +141,20 @@ public class Pantalla_Iniciar_Sesion extends Pantalla_secundaria{
 			add(boton_volver);
 			
 
+			JButton boton_olvido = new JButton("Recuperar contraseña");
+			boton_olvido.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					botonframe (new Pantalla_Recuperar_password (num_fondo,num_musica));
+				}
+			});
+			boton_olvido.setForeground(Color.PINK);
+			boton_olvido.setFont(new Font("Dialog", Font.PLAIN, 14));
+			boton_olvido.setBounds(676, 434, 286, 21);
+			//boton_olvido.setContentAreaFilled(false);
+			boton_olvido.setBackground(new Color(199, 21, 133));
+			boton_olvido.setBorderPainted(false);
+			add(boton_olvido);
+			
 			JLabel ima = new JLabel();
 			ima.setVerticalAlignment(SwingConstants.CENTER);
 			ima.setIcon(imagenes.getUnotam(2,400, 430, 600));
@@ -150,15 +164,15 @@ public class Pantalla_Iniciar_Sesion extends Pantalla_secundaria{
 			
 
 			
+
+			
 			
 			add(lblNewLabel_2);
 			add(lblband);
+			
+			
 		
 			this.add_fondo(num_fondo);
 			this.boton_ajustes(0,new Usuario (),num_fondo,num_musica);
 	}
-	
-	
-	
-
 }

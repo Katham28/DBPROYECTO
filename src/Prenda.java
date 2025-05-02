@@ -27,6 +27,11 @@ public class Prenda {
 	    this.clave = clave;
 	}
 	
+	@Override
+	public String toString() {
+		return  name ;
+	}
+
 	public Prenda(String name,String descripcion,String name_imagen,int puntaje) {
 		this.name = name;
 		try {

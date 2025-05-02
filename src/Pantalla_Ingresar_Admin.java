@@ -46,9 +46,19 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		add(boton_volver);
 		
 
+		JLabel lblNewLabelB2 = new JLabel("Selecciona categoria");
+		lblNewLabelB2.setOpaque(true);
+		lblNewLabelB2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabelB2.setForeground(Color.PINK);
+		lblNewLabelB2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblNewLabelB2.setBackground(Color.BLACK);
+		lblNewLabelB2.setBounds(178, 117, 208, 33);
+		add(lblNewLabelB2);
+		
+		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Cuerpo", "Ojos", "Cejas", "Boca", "Vello", "Tatuaje", "Piercing", "Capa", "Peinado", "Pantalon", "Sombrero", "Lentes", "Calcetas", "Top", "Calzado"}));
-		comboBox.setBounds(835, 151, 208, 31);
+		comboBox.setBounds(178, 151, 286, 31);
 		comboBox.setFont(new Font("Artifakt Element", Font.PLAIN, 14));
 		comboBox.setForeground(Color.PINK);
 		comboBox.setBackground(Color.BLACK);
@@ -62,10 +72,19 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		boton_ingresar.setBackground(Color.PINK);
 		boton_ingresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int re=0;
+				
+				if(re==1) {
+					
+				}
+				else {
+					botonframe (new Pantalla_Menu_Admin (num_fondo,num_musica));
+				}
+				
 				
 			}
 		});
-		boton_ingresar.setBounds(921, 226, 122, 27);
+		boton_ingresar.setBounds(902, 466, 122, 27);
 		add(boton_ingresar);
 		
 		JTextField textField = new JTextField(" ");
@@ -73,7 +92,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		textField.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField.setColumns(10);
 		textField.setBackground(Color.PINK);
-		textField.setBounds(174, 151, 286, 33);
+		textField.setBounds(178, 267, 286, 33);
 		add(textField);
 		
 		
@@ -83,7 +102,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		lblNewLabel.setForeground(Color.PINK);
 		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel.setBackground(Color.BLACK);
-		lblNewLabel.setBounds(174, 121, 208, 33);
+		lblNewLabel.setBounds(178, 237, 208, 33);
 		add(lblNewLabel);
 		
 		textField_1 = new JTextField(" ");
@@ -91,7 +110,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		textField_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_1.setColumns(10);
 		textField_1.setBackground(Color.PINK);
-		textField_1.setBounds(174, 224, 286, 33);
+		textField_1.setBounds(178, 340, 286, 33);
 		add(textField_1);
 		
 		JLabel lblNewLabel4 = new JLabel("Ingresa nombre del archivo");
@@ -100,7 +119,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		lblNewLabel4.setForeground(Color.PINK);
 		lblNewLabel4.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel4.setBackground(Color.BLACK);
-		lblNewLabel4.setBounds(174, 194, 208, 33);
+		lblNewLabel4.setBounds(178, 310, 208, 33);
 		add(lblNewLabel4);
 		
 		textField_2 = new JTextField(" ");
@@ -108,7 +127,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		textField_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_2.setColumns(10);
 		textField_2.setBackground(Color.PINK);
-		textField_2.setBounds(503, 151, 286, 33);
+		textField_2.setBounds(507, 267, 286, 33);
 		add(textField_2);
 		
 		JLabel lblNewLabel_1 = new JLabel("Ingresa puntaje");
@@ -117,7 +136,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		lblNewLabel_1.setForeground(Color.PINK);
 		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel_1.setBackground(Color.BLACK);
-		lblNewLabel_1.setBounds(503, 121, 208, 33);
+		lblNewLabel_1.setBounds(507, 237, 208, 33);
 		add(lblNewLabel_1);
 		
 		
@@ -126,7 +145,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		textField_3.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_3.setColumns(10);
 		textField_3.setBackground(Color.PINK);
-		textField_3.setBounds(503, 224, 286, 33);
+		textField_3.setBounds(507, 340, 286, 33);
 		add(textField_3);
 		
 		JLabel lblNewLabel_11 = new JLabel("Ingresa descripcion");
@@ -135,7 +154,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		lblNewLabel_11.setForeground(Color.PINK);
 		lblNewLabel_11.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel_11.setBackground(Color.BLACK);
-		lblNewLabel_11.setBounds(503, 194, 208, 33);
+		lblNewLabel_11.setBounds(507, 310, 208, 33);
 		add(lblNewLabel_11);
 		this.add_fondo(num_fondo);
 		//this.boton_ajustes(0,new Usuario (),num_fondo,num_musica);

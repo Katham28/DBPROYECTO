@@ -31,9 +31,20 @@ public class Controlador_Usuario {
 		return foto;
 	}
 	
+	protected int cambiar_password (String user,String new_password) {
+		int re= modelo_usuario.cambiar_password(user, new_password);
+		return re;
+	}
+	
 	protected int actualizarUsuario (Usuario usa) {
 		int re=modelo_usuario.actualizar_datos(usa);
 		return re;
+	}
+	
+	protected Usuario buscarUsuario_Correo(String usa) {
+		
+		Usuario b= modelo_usuario.buscarUsuario_Correo(usa);
+		return b;
 	}
 	
 	//protected void cerrar_Conexion () {

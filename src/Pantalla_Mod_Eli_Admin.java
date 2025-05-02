@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
+import javax.swing.JSeparator;
 
 public class Pantalla_Mod_Eli_Admin extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -28,11 +30,106 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 	
 	JButton boton_MOD= new JButton ();
 	JButton boton_ELI= new JButton ();
+	
+	JCheckBox chckbxNewCheckBox = new JCheckBox("ELIMINAR");
 
 	/**
 	 * Create the panel.
 	 */
 	
+	public void add_fondo (int num_fondo) {
+		System.out.println(""+num_fondo);
+		JLabel fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.CENTER);
+		fondo.setIcon(imagenes.getfondo(""+num_fondo));
+		fondo.setBorder(null);
+		fondo.setBounds(0, 0, 1134, 650);
+		add(fondo);	
+
+	}
+	
+	public void botonframe (JPanel b) {
+		removeAll();
+		setLayout(new BorderLayout(0, 0));
+		add(b);
+		repaint();
+		revalidate();
+	}
+	
+	public void disable () {
+		boton_MOD.setEnabled(false);
+		boton_ELI.setEnabled(true);
+		
+		//lblNewLabel.setEnabled(true);
+		 textField.setEnabled(false);
+		 
+		 //lblNewLabel_1.setEnabled(true);
+		 textField_2.setEnabled(false);
+		 
+		 //lblNewLabel4.setEnabled(true);
+		 textField_1.setEnabled(false);
+		 
+		// lblNewLabel_11.setEnabled(true);
+		 textField_3.setEnabled(false); 
+		 
+		
+	}
+	
+	
+	public void enable () {
+		boton_MOD.setEnabled(true);
+		boton_ELI.setEnabled(false);
+		
+		//lblNewLabel.setEnabled(true);
+		 textField.setEnabled(true);
+		 
+		// lblNewLabel_1.setEnabled(true);
+		 textField_2.setEnabled(true);
+		 
+		 //lblNewLabel4.setEnabled(true);
+		 textField_1.setEnabled(true);
+		 
+		 //lblNewLabel_11.setEnabled(true);
+		 textField_3.setEnabled(true); 
+	}
+	
+	public void first_enable () {
+		chckbxNewCheckBox.setEnabled(true);
+		boton_MOD.setEnabled(true);
+		boton_ELI.setEnabled(false);
+		
+
+		//lblNewLabel.setEnabled(true);
+		 textField.setEnabled(true);
+		 
+		// lblNewLabel_1.setEnabled(true);
+		 textField_2.setEnabled(true);
+		 
+		 //lblNewLabel4.setEnabled(true);
+		 textField_1.setEnabled(true);
+		 
+		 //lblNewLabel_11.setEnabled(true);
+		 textField_3.setEnabled(true); 
+	}
+	
+	public void first_disable () {
+		chckbxNewCheckBox.setEnabled(false);
+		boton_MOD.setEnabled(false);
+		boton_ELI.setEnabled(false);
+		
+		
+		//lblNewLabel.setEnabled(true);
+		 textField.setEnabled(false);
+		 
+		 //lblNewLabel_1.setEnabled(true);
+		 textField_2.setEnabled(false);
+		 
+		 //lblNewLabel4.setEnabled(true);
+		 textField_1.setEnabled(false);
+		 
+		// lblNewLabel_11.setEnabled(true);
+		 textField_3.setEnabled(false); 
+	}
 
 	public Pantalla_Mod_Eli_Admin(int num_fondo, int num_musica) {
 		setBackground(new Color(199, 21, 133));
@@ -59,21 +156,25 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		boton_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			int re=0;
+			
+			//1 para errpr
+			
+			
 			if(re==1) {
-				disable();
+				first_disable();
 			}else {
-				enable();
+				first_enable();
 			}
 				
 			}
 		});
-		boton_buscar.setBounds(775, 147, 122, 27);
+		boton_buscar.setBounds(775, 210, 122, 27);
 		add(boton_buscar);
 		
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Cuerpo", "Ojos", "Cejas", "Boca", "Vello", "Tatuaje", "Piercing", "Capa", "Peinado", "Pantalon", "Sombrero", "Lentes", "Calcetas", "Top", "Calzado"}));
-		comboBox.setBounds(516, 145, 208, 31);
+		comboBox.setBounds(516, 113, 286, 31);
 		comboBox.setFont(new Font("Artifakt Element", Font.PLAIN, 14));
 		comboBox.setForeground(Color.PINK);
 		comboBox.setBackground(Color.BLACK);
@@ -88,7 +189,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		lblNewLabelB.setForeground(Color.PINK);
 		lblNewLabelB.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabelB.setBackground(Color.BLACK);
-		lblNewLabelB.setBounds(187, 114, 208, 33);
+		lblNewLabelB.setBounds(187, 80, 208, 33);
 		add(lblNewLabelB);
 		
 		JTextField textField_4B = new JTextField(" ");
@@ -96,8 +197,18 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		textField_4B.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_4B.setColumns(10);
 		textField_4B.setBackground(Color.PINK);
-		textField_4B.setBounds(187, 145, 286, 33);
+		textField_4B.setBounds(187, 113, 286, 33);
 		add(textField_4B);
+		
+		
+		JLabel lblNewLabelB2 = new JLabel("Selecciona categoria");
+		lblNewLabelB2.setOpaque(true);
+		lblNewLabelB2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabelB2.setForeground(Color.PINK);
+		lblNewLabelB2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblNewLabelB2.setBackground(Color.BLACK);
+		lblNewLabelB2.setBounds(516, 80, 208, 33);
+		add(lblNewLabelB2);
 		
 		
 		//modifica
@@ -107,7 +218,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		lblNewLabel.setForeground(Color.PINK);
 		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel.setBackground(Color.BLACK);
-		lblNewLabel.setBounds(187, 267, 208, 33);
+		lblNewLabel.setBounds(187, 233, 208, 33);
 		add(lblNewLabel);
 		
 		 textField = new JTextField(" ");
@@ -115,7 +226,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		textField.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField.setColumns(10);
 		textField.setBackground(Color.PINK);
-		textField.setBounds(187, 299, 286, 33);
+		textField.setBounds(187, 265, 286, 33);
 		add(textField);
 		
 		textField_1 = new JTextField(" ");
@@ -123,7 +234,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		textField_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_1.setColumns(10);
 		textField_1.setBackground(Color.PINK);
-		textField_1.setBounds(187, 383, 286, 33);
+		textField_1.setBounds(187, 349, 286, 33);
 		add(textField_1);
 		
 
@@ -133,7 +244,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		lblNewLabel4.setForeground(Color.PINK);
 		lblNewLabel4.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel4.setBackground(Color.BLACK);
-		lblNewLabel4.setBounds(187, 353, 208, 33);
+		lblNewLabel4.setBounds(187, 319, 208, 33);
 		add(lblNewLabel4);
 		
 		textField_2 = new JTextField(" ");
@@ -141,7 +252,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		textField_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_2.setColumns(10);
 		textField_2.setBackground(Color.PINK);
-		textField_2.setBounds(516, 299, 286, 33);
+		textField_2.setBounds(516, 265, 286, 33);
 		add(textField_2);
 		
 		lblNewLabel_1 = new JLabel("Ingresa puntaje");
@@ -150,7 +261,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		lblNewLabel_1.setForeground(Color.PINK);
 		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel_1.setBackground(Color.BLACK);
-		lblNewLabel_1.setBounds(516, 267, 208, 33);
+		lblNewLabel_1.setBounds(516, 233, 208, 33);
 		add(lblNewLabel_1);
 		
 		
@@ -159,7 +270,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		textField_3.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_3.setColumns(10);
 		textField_3.setBackground(Color.PINK);
-		textField_3.setBounds(516, 383, 286, 33);
+		textField_3.setBounds(516, 349, 286, 33);
 		add(textField_3);
 		
 		 lblNewLabel_11 = new JLabel("Ingresa descripcion");
@@ -168,10 +279,10 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		lblNewLabel_11.setForeground(Color.PINK);
 		lblNewLabel_11.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel_11.setBackground(Color.BLACK);
-		lblNewLabel_11.setBounds(516, 353, 208, 33);
+		lblNewLabel_11.setBounds(516, 319, 208, 33);
 		add(lblNewLabel_11);
 		
-		disable();
+		
 		
 		 boton_MOD = new JButton("MODIFICAR");
 		boton_MOD.addActionListener(new ActionListener() {
@@ -190,7 +301,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		boton_MOD.setForeground(new Color(199, 21, 133));
 		boton_MOD.setFont(new Font("Dialog", Font.PLAIN, 14));
 		boton_MOD.setBackground(Color.PINK);
-		boton_MOD.setBounds(775, 461, 122, 27);
+		boton_MOD.setBounds(775, 450, 122, 27);
 		add(boton_MOD);
 		
 		
@@ -212,60 +323,37 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		boton_ELI.setForeground(new Color(199, 21, 133));
 		boton_ELI.setFont(new Font("Dialog", Font.PLAIN, 14));
 		boton_ELI.setBackground(Color.PINK);
-		boton_ELI.setBounds(775, 528, 122, 27);
+		boton_ELI.setBounds(775, 546, 122, 27);
 		add(boton_ELI);
 		
+		
+		
+		
+		
+		chckbxNewCheckBox.setFont(new Font("Dialog", Font.PLAIN, 12));
+		chckbxNewCheckBox.setForeground(Color.PINK);
+		chckbxNewCheckBox.setBackground(Color.BLACK);
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				if(chckbxNewCheckBox.isSelected()) {
+					disable();
+				}
+				else {
+					enable();
+					
+				}
+				
+			}
+		});
+	
+		chckbxNewCheckBox.setBounds(635, 545, 134, 31);
+		add(chckbxNewCheckBox);
+		first_disable ();
 		this.add_fondo(num_fondo);
 		
-		this.disable();
-		//this.boton_ajustes(0,new Usuario (),num_fondo,num_musica);
+		
 	}
 
-	
-	public void add_fondo (int num_fondo) {
-		System.out.println(""+num_fondo);
-		JLabel fondo = new JLabel();
-		fondo.setVerticalAlignment(SwingConstants.CENTER);
-		fondo.setIcon(imagenes.getfondo(""+num_fondo));
-		fondo.setBorder(null);
-		fondo.setBounds(0, 0, 1134, 650);
-		add(fondo);
-		
-		
 
-		
-		
-		
-		
-
-	}
-	
-	public void botonframe (JPanel b) {
-		removeAll();
-		setLayout(new BorderLayout(0, 0));
-		add(b);
-		repaint();
-		revalidate();
-	}
-	
-	public void disable () {
-		 textField_1.setEnabled(false);
-		 textField_2.setEnabled(false);
-		 textField_3.setEnabled(false);
-		 textField.setEnabled(false);
-		 boton_MOD.setEnabled (false);
-		 boton_ELI.setEnabled (false);
-		 
-		
-	}
-	
-	
-	public void enable () {
-		 textField_1.setEnabled(true);
-		 textField_2.setEnabled(true);
-		 textField_3.setEnabled(true);
-		 textField.setEnabled(true);
-		 boton_MOD.setEnabled (true);
-		 boton_ELI.setEnabled (true);
-	}
 }

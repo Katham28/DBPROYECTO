@@ -101,6 +101,52 @@ public class Modelo_Usuario {
 		
 	}
 	
+	public Usuario buscarUsuario_Correo(String usa) {
+		Usuario usua= new Usuario ();
+		String sql= "SELECT * FROM Usuario where user = ? ";
+		PreparedStatement consulta=null;
+		ResultSet resultado=null;
+		
+		try {
+			
+		consulta= connect.prepareStatement(sql);
+		 consulta.setString(1, usa);
+		 
+		 resultado=consulta.executeQuery ();
+		 
+		 if(resultado.next()) {
+			 Usuario b=new Usuario ();
+				b.setUser(resultado.getString("user"));
+				//b.setPassword(resultado.getString("password"));
+				b.setCorreo(resultado.getString("correo"));
+				//b.setFondo(resultado.getInt("num_fondo"));
+				//b.setMusica(resultado.getInt("num_musica"));
+				//b.setCve_usuario(resultado.getInt("cve_usuario"));
+				//b.setFoto_perfil(resultado.getInt("num_foto_perfil"));
+			System.out.println(b);
+			
+			
+			return b;
+		 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERROR buscando Usuario");
+			e.printStackTrace();
+		}
+		finally {
+			 
+				try {
+					if (resultado != null) resultado.close();
+					 if (consulta != null) consulta.close();
+				} catch (SQLException e) {
+					System.out.println("ERROR CERRANDO");
+				}
+			
+		}
+		
+		return null;
+	}
+	
 	public Usuario buscarUsuario  (Usuario p) {
 		String sql= "SELECT * FROM Usuario where password = ? and user = ? ";
 		PreparedStatement consulta=null;
@@ -164,6 +210,31 @@ public class Modelo_Usuario {
 			System.out.println("ERROR actualizando fondo");
 			e.printStackTrace();
 		}
+	}
+	
+	public int cambiar_password(String user, String new_password){
+	int re=0;
+	
+	String sql= "UPDATE Usuario set password=? where user=?";
+	
+	try {
+		PreparedStatement consulta= connect.prepareStatement(sql);
+		
+	 consulta.setString(1,new_password);
+	 consulta.setString(2,user);
+
+	 
+	 consulta.executeUpdate();
+	 consulta.close();
+	 re=1;
+	} catch (SQLException e) {
+		System.out.println("ERROR actualizando contraseña");
+		re=0;
+	}
+	
+	
+	
+	return re;
 	}
 	
 	public void cambiar_foto (int cve_usuario,int num_foto_perfil) {
