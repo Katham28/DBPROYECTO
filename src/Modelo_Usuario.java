@@ -52,7 +52,6 @@ public class Modelo_Usuario {
 		}
 	}
 	
-	
 	public int verificarUsuario(String user) {
 		int re=0;
 		String sql= "SELECT * FROM Usuario where user = ? ";

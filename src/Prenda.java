@@ -10,6 +10,10 @@ public class Prenda {
 	private int clave;
 
 	
+	public Prenda() {
+		super();
+	}
+
 	//CONSTRUCTORES
 	public Prenda(int clave, String name, String descripcion, String name_imagen) {
 	    this.name = name;

@@ -60,5 +60,11 @@ public class Modelo_Prenda {
 		
 		
 	}
+	
+    public void cargar_categ(String categ) {
+		
+		StrategyCuerpo st= new StrategyCuerpo ();
+		
+	}
 
 }
