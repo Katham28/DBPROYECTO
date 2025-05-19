@@ -19,21 +19,32 @@ private Modelo_Prenda modelo_prenda= Modelo_Prenda.getInstancia();
 	
 	
 	//En bd
-	public void insertar_Prenda (Prenda prenda) {
-		modelo_prenda.insertar_Prenda(prenda);
+	public int insertar_Prenda (Prenda prenda,String categ) {
+		int re=modelo_prenda.insertar_Prenda(prenda, categ);
+		return re;
 	}
 	
-	public void eliminar_Prenda (Prenda prenda) {
-		modelo_prenda.eliminar_Prenda(prenda);
+	public int eliminar_Prenda (Prenda prenda, String categ) {
+		int re=modelo_prenda.eliminar_Prenda(prenda,categ);
+		return re;
 	}
 	
-	public void modificar_Prenda (Prenda prenda) {
-		modelo_prenda.modificar_Prenda(prenda);
+	public int modificar_Prenda (Prenda prenda,String categ) {
+		int re=modelo_prenda.modificar_Prenda(prenda,categ);
+		return re;
 	}
 	
-	public Prenda buscar_Prenda (Prenda prenda) {
-		modelo_prenda.buscar_Prenda(prenda);
-		return prenda;
+	public Prenda buscar_1_Prenda (Prenda prenda,String categ) {
+		Prenda prendab=this.modelo_prenda.buscar_1_Prenda (prenda,categ);
+		
+		return prendab;
+	}
+	
+	public Categoria buscar_categ (String categ) {
+		Categoria categor= this.modelo_prenda.buscar_categ(categ);
+		
+		System.out.println(categor);
+		return categor;
 	}
 	
 	public void cargar_todo() {

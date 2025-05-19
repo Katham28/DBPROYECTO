@@ -24,7 +24,10 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 	private JTextField textField_2;
 	private JTextField textField_3;
 
-
+	JTextField textField = new JTextField(" ");
+	
+	
+	JLabel lblmensaje = new JLabel ("");
 
 
 	public Pantalla_Ingresar_Admin(int num_fondo, int num_musica) {
@@ -45,6 +48,14 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		boton_volver.setBackground(Color.PINK);
 		add(boton_volver);
 		
+		lblmensaje.setOpaque(true);
+		lblmensaje.setHorizontalAlignment(SwingConstants.LEFT);
+		lblmensaje.setForeground(Color.PINK);
+		lblmensaje.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblmensaje.setBackground(Color.BLACK);
+		lblmensaje.setBounds(707, 408, 317, 31);
+		lblmensaje.setVisible(false);
+		add(lblmensaje);
 
 		JLabel lblNewLabelB2 = new JLabel("Selecciona categoria");
 		lblNewLabelB2.setOpaque(true);
@@ -71,23 +82,77 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		boton_ingresar.setFont(new Font("Artifakt Element", Font.PLAIN, 14));
 		boton_ingresar.setBackground(Color.PINK);
 		boton_ingresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int re=0;
-				
-				if(re==1) {
-					
-				}
-				else {
-					botonframe (new Pantalla_Menu_Admin (num_fondo,num_musica));
-				}
-				
-				
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            // Validación de campos vacíos
+		            if (textField.getText().isBlank() ||
+		                textField_3.getText().isBlank() ||
+		                textField_1.getText().isBlank() ||
+		                textField_2.getText().isBlank()) {
+		                lblmensaje.setText("Se deben llenar todos los campos");
+		                lblmensaje.setVisible(true);
+		                return;
+		            }
+
+		            System.out.println("presiono");
+
+		            // Validación del puntaje (debe ser número entero positivo)
+		            int puntaje;
+		            try {
+		                puntaje = Integer.parseInt(textField_2.getText());
+		                if (puntaje < 0) {
+		                    lblmensaje.setText("El puntaje debe ser un número positivo");
+		                    lblmensaje.setVisible(true);
+		                    return;
+		                }
+		            } catch (NumberFormatException ex) {
+		                lblmensaje.setText("El puntaje debe ser un número entero positivo");
+		                lblmensaje.setVisible(true);
+		                return;
+		            }
+
+		            // Creación de objetos
+		            Prenda g = new Prenda();
+		            Controlador_Prenda b = new Controlador_Prenda();
+
+		            // Seteo de datos en la prenda
+		            g.setName(textField.getText().trim());
+		            g.setDescripcion(textField_3.getText().trim());
+		            g.setName_archivo(textField_1.getText().trim());
+		            g.setPuntaje(puntaje);
+
+		            // Verificación de existencia previa
+		            Prenda existente = b.buscar_1_Prenda(g, comboBox.getSelectedItem().toString());
+		            if (existente != null) {
+		                lblmensaje.setText("Esa prenda ya existe");
+		                lblmensaje.setVisible(true);
+		                return;
+		            }
+
+		            // Inserción si no existía
+		            int re=0;
+		             b = new Controlador_Prenda();
+		            re = b.insertar_Prenda(g, comboBox.getSelectedItem().toString());
+
+		            if (re == 1) {
+		                lblmensaje.setText("");
+		                lblmensaje.setVisible(false);
+		                botonframe(new Pantalla_Menu_Admin(num_fondo, num_musica));
+		            } else {
+		                lblmensaje.setText("Error al insertar la prenda");
+		                lblmensaje.setVisible(true);
+		            }
+		        } catch (Exception ex) {
+		            lblmensaje.setText("Error inesperado: " + ex.getMessage());
+		            lblmensaje.setVisible(true);
+		            ex.printStackTrace();
+		        }
+		    }
 		});
 		boton_ingresar.setBounds(902, 466, 122, 27);
 		add(boton_ingresar);
 		
-		JTextField textField = new JTextField(" ");
+
 		textField.setForeground(new Color(199, 21, 133));
 		textField.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField.setColumns(10);
@@ -122,7 +187,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		lblNewLabel4.setBounds(178, 310, 208, 33);
 		add(lblNewLabel4);
 		
-		textField_2 = new JTextField(" ");
+		textField_2 = new JTextField("0");
 		textField_2.setForeground(new Color(199, 21, 133));
 		textField_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_2.setColumns(10);

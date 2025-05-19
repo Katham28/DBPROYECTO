@@ -14,12 +14,13 @@ public class Facade_agregar {
 		int re=0;
 		strategycontext.setStrategy_gestion_prendas(categ);
 		
-		Prenda b=strategycontext.strategy_gestion_prendas.buscar_uno(prenda, connect);
+		//Prenda b=strategycontext.strategy_gestion_prendas.buscar_uno(prenda, connect);
 		
-		if (b==null) {
-			return re;
-		}
-		else {
+		//if (b==null) {
+			//return re;
+		//}
+		//else
+		{
 			re=1;
 			strategycontext.strategy_gestion_prendas.agregar_prenda(prenda, connect);
 		}

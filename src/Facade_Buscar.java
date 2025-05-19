@@ -15,13 +15,12 @@ public class Facade_Buscar {
 		return b;
 	}
 	
-	public Categoria buscar_todas_prendas(String categ, Connection connect) {		
+	public Categoria buscar_1_categ(String categ, Connection connect) {		
 		strategycontext.setStrategy_gestion_prendas(categ);
-		
-		Categoria b=strategycontext.strategy_gestion_prendas.buscar_todos(connect);
-		
-		return b;
+		Categoria categor= strategycontext.getStrategy_gestion_prendas().buscar_todos(connect);
+		return categor;
 	}
+	
 	
 	
 	public  LinkedList<Categoria> buscar_todos_Categ (Connection connect){

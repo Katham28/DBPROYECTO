@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class Modelo_Prenda {
 	private static Modelo_Prenda instancia;
 	private Connection connect=null;
-	
+	private Facade fac= new Facade ();
 	//todas las prendas de una categoria
 	private LinkedList <Prenda> prendas=new LinkedList ();
 	
@@ -37,22 +37,30 @@ public class Modelo_Prenda {
 	
 	
 	//En bd
-	public void insertar_Prenda (Prenda prenda) {
-		
+	public int insertar_Prenda (Prenda prenda, String categ) {
+		int re=fac.facade_agregar.agregar(prenda, categ, connect);
+		return re;
 	}
 	
-	public void eliminar_Prenda (Prenda prenda) {
-		
+	public int  eliminar_Prenda (Prenda prenda,String categ) {
+		int re=fac.facade_eliminar.eliminar(prenda, categ, connect);
+		return re;
 	}
 	
-	public void modificar_Prenda (Prenda prenda) {
-		
+	public int modificar_Prenda (Prenda prenda, String categ) {
+		int re=fac.facade_modificar.modficar(prenda, categ, connect);
+		return re;
+	
 	}
 	
-	public Prenda buscar_Prenda (Prenda prenda) {
-		
-		
-		return prenda;
+	public Prenda buscar_1_Prenda (Prenda prenda,String categ) {
+		Prenda prendab=fac.facade_buscar.buscar_Una_Prenda(prenda, categ, connect);
+		return prendab;
+	}
+	
+	public Categoria buscar_categ (String categ) {
+		Categoria categor=fac.facade_buscar.buscar_1_categ(categ,connect);
+		return categor;
 	}
 	
 	public void cargar_todo() {

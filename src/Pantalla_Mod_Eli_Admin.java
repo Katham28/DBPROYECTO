@@ -24,6 +24,11 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 	private JTextField textField_2=new JTextField ();
 	private JTextField textField_3=new JTextField ();
 	private JTextField textField_4=new JTextField ();
+	JLabel lblmensaje = new JLabel("");
+	JLabel lblmensaje2 = new JLabel("");
+	
+	JComboBox comboBox = new JComboBox();
+	JTextField textField_4B = new JTextField("");
 	JLabel lblNewLabel_11=new JLabel ();
 	JLabel lblNewLabel_1=new JLabel ();
 	JTextField textField=new JTextField ();
@@ -45,6 +50,10 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		fondo.setBorder(null);
 		fondo.setBounds(0, 0, 1134, 650);
 		add(fondo);	
+		
+		
+		
+
 
 	}
 	
@@ -72,6 +81,13 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		// lblNewLabel_11.setEnabled(true);
 		 textField_3.setEnabled(false); 
 		 
+
+		 
+		 lblmensaje.setText("");
+		 lblmensaje.setVisible(false);
+		 
+		 lblmensaje2.setText("");
+		 lblmensaje2.setVisible(false);
 		
 	}
 	
@@ -136,6 +152,8 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		setBounds(100, 100, 1122, 650);
 		setLayout(null);
 		
+
+		
 		JButton boton_volver = new JButton("VOLVER");
 		boton_volver.setForeground(new Color(199, 21, 133));
 		boton_volver.setBounds(10, 55, 122, 27);
@@ -148,6 +166,24 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		boton_volver.setFont(new Font("Artifakt Element", Font.PLAIN, 14));
 		boton_volver.setBackground(Color.PINK);
 		add(boton_volver);
+
+		lblmensaje.setOpaque(true);
+		lblmensaje.setHorizontalAlignment(SwingConstants.LEFT);
+		lblmensaje.setForeground(Color.PINK);
+		lblmensaje.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblmensaje.setBackground(Color.BLACK);
+		lblmensaje.setBounds(642, 169, 317, 31);
+		lblmensaje.setVisible(false);
+		add(lblmensaje);
+		
+		lblmensaje2.setOpaque(true);
+		lblmensaje2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblmensaje2.setForeground(Color.PINK);
+		lblmensaje2.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lblmensaje2.setBackground(Color.BLACK);
+		lblmensaje2.setBounds(642, 505, 317, 31);
+		lblmensaje2.setVisible(false);
+		add(lblmensaje2);
 		
 		JButton boton_buscar = new JButton("BUSCAR");
 		boton_buscar.setForeground(new Color(199, 21, 133));
@@ -158,6 +194,40 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 			int re=0;
 			
 			//1 para errpr
+			
+
+			Controlador_Prenda b = new Controlador_Prenda();
+			Prenda g= new Prenda ();
+			
+			if(textField_4B.getText().isEmpty()  ) {
+				 lblmensaje.setVisible(true);
+				 lblmensaje.setText("Ingresa lo que hay que buscar");
+				 System.out.println("Vacio");
+				re=1;
+			}else {
+				b = new Controlador_Prenda();
+				g= new Prenda ();
+				g.setName("" + textField_4B.getText());
+				g=b.buscar_1_Prenda(g, comboBox.getSelectedItem().toString());
+				lblmensaje.setVisible(false);
+			}
+		
+			 if (g==null && !textField_4B.getText().isEmpty()) {
+				re=1;
+				 textField.setText("");
+				 textField_2.setText("");
+				 textField_1.setText ("");
+				 textField_3.setText("");
+				 lblmensaje.setVisible(true);
+				 lblmensaje.setText("No encontrado");
+			}else if (!textField_4B.getText().isEmpty()) {
+				 textField.setText(g.getName());
+				 textField_2.setText(""+g.getPuntaje());
+				 textField_1.setText (g.getName_archivo());
+				 textField_3.setText(g.getDescripcion());
+				 lblmensaje.setText("");
+				 lblmensaje.setVisible(false);
+			}
 			
 			
 			if(re==1) {
@@ -172,7 +242,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		add(boton_buscar);
 		
 
-		JComboBox comboBox = new JComboBox();
+		
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Cuerpo", "Ojos", "Cejas", "Boca", "Vello", "Tatuaje", "Piercing", "Capa", "Peinado", "Pantalon", "Sombrero", "Lentes", "Calcetas", "Top", "Calzado"}));
 		comboBox.setBounds(516, 113, 286, 31);
 		comboBox.setFont(new Font("Artifakt Element", Font.PLAIN, 14));
@@ -192,7 +262,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		lblNewLabelB.setBounds(187, 80, 208, 33);
 		add(lblNewLabelB);
 		
-		JTextField textField_4B = new JTextField(" ");
+		
 		textField_4B.setForeground(new Color(199, 21, 133));
 		textField_4B.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textField_4B.setColumns(10);
@@ -227,6 +297,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		textField.setColumns(10);
 		textField.setBackground(Color.PINK);
 		textField.setBounds(187, 265, 286, 33);
+		textField.setEditable(false);
 		add(textField);
 		
 		textField_1 = new JTextField(" ");
@@ -287,15 +358,67 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		 boton_MOD = new JButton("MODIFICAR");
 		boton_MOD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+		            // Validación de campos vacíos
+		            if (textField.getText().isBlank() ||
+		                textField_3.getText().isBlank() ||
+		                textField_1.getText().isBlank() ||
+		                textField_2.getText().isBlank()) {
+		                lblmensaje2.setText("Se deben llenar todos los campos");
+		                lblmensaje2.setVisible(true);
+		                return;
+		            }
+
+		            System.out.println("presiono");
+
+		            // Validación del puntaje (debe ser número entero positivo)
+		            int puntaje;
+		            try {
+		                puntaje = Integer.parseInt(textField_2.getText());
+		                if (puntaje < 0) {
+		                    lblmensaje2.setText("El puntaje debe ser un número positivo");
+		                    lblmensaje2.setVisible(true);
+		                    return;
+		                }
+		            } catch (NumberFormatException ex) {
+		                lblmensaje2.setText("El puntaje debe ser un número entero positivo");
+		                lblmensaje2.setVisible(true);
+		                return;
+		            }
+
+		            // Creación de objetos
+		            Prenda g = new Prenda();
+		            Controlador_Prenda b = new Controlador_Prenda();
+
+		            // Seteo de datos en la prenda
+		            g.setName(textField.getText().trim());
+		            g.setDescripcion(textField_3.getText().trim());
+		            g.setName_archivo(textField_1.getText().trim());
+		            g.setPuntaje(puntaje);
+
+		            int re=0;
+		             b = new Controlador_Prenda();
+		             re=b.modificar_Prenda(g, comboBox.getSelectedItem().toString());
+
+		            if (re !=-1) {
+		             
+		                first_disable();
+						lblmensaje2.setText("Prenda modificada correctamente");
+						lblmensaje2.setVisible(true);
+						
+		               // botonframe(new Pantalla_Menu_Admin(num_fondo, num_musica));
+		            } else {
+		            	lblmensaje2.setText("ERROR modificando la prenda");
+		                lblmensaje2.setVisible(true);
+		            }
+		        } catch (Exception ex) {
+		            lblmensaje2.setText("Error inesperado: " + ex.getMessage());
+		            lblmensaje2.setVisible(true);
+		            ex.printStackTrace();
+		        }
 				
-				int re=0;
-				
-				if(re==1) {
 					
-				}
-				else {
-					botonframe (new Pantalla_Menu_Admin (num_fondo,num_musica));
-				}
+				
 			}
 		});
 		boton_MOD.setForeground(new Color(199, 21, 133));
@@ -312,11 +435,20 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int re=0;
 				
-				if(re==1) {
-					
+				
+				Controlador_Prenda b = new Controlador_Prenda();
+				Prenda g= new Prenda ();
+				g.setName("" + textField_4B.getText());
+				re=b.eliminar_Prenda(g, comboBox.getSelectedItem().toString());
+				if(re==-1) {
+					lblmensaje2.setText("ERROR eliminando la prenda");
 				}
 				else {
-					botonframe (new Pantalla_Menu_Admin (num_fondo,num_musica));
+					//botonframe (new Pantalla_Menu_Admin (num_fondo,num_musica));
+					first_disable();
+					lblmensaje2.setText("Prenda eliminada correctamente");
+					lblmensaje2.setVisible(true);
+					
 				}
 			}
 		});
@@ -350,10 +482,13 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		chckbxNewCheckBox.setBounds(635, 545, 134, 31);
 		add(chckbxNewCheckBox);
 		first_disable ();
+		
+		
+		
+		
+		
 		this.add_fondo(num_fondo);
 		
 		
 	}
-
-
 }

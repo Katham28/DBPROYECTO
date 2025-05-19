@@ -100,6 +100,10 @@ public class Pantalla_Menu_principal extends Pantalla_secundaria {
 		
 		this.add_fondo(num_fondo);
 		
+		
+		
+		
+		
 	}
 
 }

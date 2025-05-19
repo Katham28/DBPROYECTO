@@ -2,6 +2,11 @@ import javax.swing.ImageIcon;
 
 public class Prenda {
 	
+	public Prenda(String name) {
+		super();
+		this.name = name;
+	}
+
 	private String name;
 	private String name_archivo;
 	private String descripcion;
@@ -11,7 +16,7 @@ public class Prenda {
 
 	
 	public Prenda() {
-		super();
+		
 	}
 
 	//CONSTRUCTORES
@@ -33,7 +38,8 @@ public class Prenda {
 	
 	@Override
 	public String toString() {
-		return  name ;
+		return "Prenda [name=" + name + ", name_archivo=" + name_archivo + ", descripcion=" + descripcion + ", puntaje="
+				+ puntaje + "]";
 	}
 
 	public Prenda(String name,String descripcion,String name_imagen,int puntaje) {

@@ -21,8 +21,8 @@ public class Facade_eliminar {
 		//}
 		//else {
 			
-			re=1;
-			strategycontext.strategy_gestion_prendas.eliminar_prenda(prenda,  connect);
+			
+		re=strategycontext.strategy_gestion_prendas.eliminar_prenda(prenda,  connect);
 		//}
 		
 		return re;

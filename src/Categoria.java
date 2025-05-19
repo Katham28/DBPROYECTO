@@ -44,5 +44,13 @@ public class Categoria {
 		this.atuendos = atuendos;
 	}	
 	
+	public void imprimir () {
+		
+		for (Prenda elemento : atuendos) {
+	        System.out.println(elemento);
+	    }
+		
+	}
+	
 
 }

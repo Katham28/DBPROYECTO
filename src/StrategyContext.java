@@ -1,5 +1,8 @@
 
 public class StrategyContext {
+	public void setStrategy_gestion_prendas(Strategy_gestion_prendas strategy_gestion_prendas) {
+		this.strategy_gestion_prendas = strategy_gestion_prendas;
+	}
 	Strategy_gestion_prendas strategy_gestion_prendas;
 	public StrategyContext() {
 		this.strategy_gestion_prendas = new StrategyCuerpo ();
