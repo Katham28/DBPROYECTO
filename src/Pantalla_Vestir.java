@@ -31,7 +31,8 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 	private LinkedList <JLabel> labels= new LinkedList();
 	private int curClaves [] = new int [20];
 	private int pun []= new int [20];
-
+	private Prenda curPrenda [] = new Prenda [15];
+	
 	int max;
 	int act=0;
 	int act2=0;
@@ -45,7 +46,24 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 	private int ver;
 
 
-
+	public void inicializarCurPrenda () {
+		for (int i=0;i<15;i++) {
+			curPrenda [i]= categ.get(i).getAtuendos().get(0);
+		}
+	
+	}
+	
+	public void iniciarlizar_personaje () {
+		
+	}
+	
+	public void imprimirCurPrenda () {
+		System.out.println("curPrendas*******************");
+		for (int i=0;i<15;i++) {
+			System.out.println(this.curPrenda[i]);
+			//System.out.println("\n");
+		}
+	}
 	/**
 	 * Create the panel.
 	 */
@@ -120,16 +138,13 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 
 		        // Print ver and curClaves array
 		        System.out.println("ver: " + ver);
-		        System.out.print("curClaves: ");
-		        for (int clave : curClaves) {
-		            System.out.print(clave + " ");
-		        }
-		        System.out.println();
+		         imprimirCurPrenda();
+		        
 
 		        // Call guardarPersonaje
-		       // Bd_mongo mongo = new Bd_mongo(usuario);
-		        //mongo.guardarPersonaje(ver, curClaves, puntaje);
-		        //mongo.cerrarConexion();
+		       Modelo_Mongo mongo = new Modelo_Mongo(usa.getUser());
+		        mongo.guardarPersonaje(num_per, curPrenda,puntaje);
+		        mongo.cerrarConexion();
 		        
 		        
 		        //try {
@@ -209,13 +224,13 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 				boton_izq_1.setEnabled(false);
 				boton_der_1.setEnabled(false);
 				act_ropa.setText("1/1");
-				name_Ropa.setText(""+categ.get(act).obtener_uno(act2));
+				name_Ropa.setText(""+categ.get(act).obtener_uno(act2).getName());
 			}
 			else  {
 				boton_izq_1.setEnabled(false);
 				boton_der_1.setEnabled(true);
 				act_ropa.setText(""+(act2+1)+"/"+(max2+1));
-				name_Ropa.setText(""+categ.get(act).obtener_uno(act2));
+				name_Ropa.setText(""+categ.get(act).obtener_uno(act2).getName());
 			}
 		
 		JButton boton_der = new JButton(">");
@@ -250,13 +265,13 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		            boton_izq_1.setEnabled(false);
 		            boton_der_1.setEnabled(false);
 		            act_ropa.setText("1/1");
-		            name_Ropa.setText("" + categ.get(act).obtener_uno(act2));
+		            name_Ropa.setText("" + categ.get(act).obtener_uno(act2).getName());
 		            cam_Actual();
 		        } else {
 		            boton_izq_1.setEnabled(false);
 		            boton_der_1.setEnabled(true);
 		            act_ropa.setText("" + (act2 + 1) + "/" + (max2 + 1));
-		            name_Ropa.setText("" + categ.get(act).obtener_uno(act2));
+		            name_Ropa.setText("" + categ.get(act).obtener_uno(act2).getName());
 		            cam_Actual();
 		        }
 		    }
@@ -294,13 +309,13 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		            boton_izq_1.setEnabled(false);
 		            boton_der_1.setEnabled(false);
 		            act_ropa.setText("1/1");
-		            name_Ropa.setText("" + categ.get(act).obtener_uno(act2));
+		            name_Ropa.setText("" + categ.get(act).obtener_uno(act2).getName());
 		            cam_Actual();
 		        } else {
 		            boton_izq_1.setEnabled(false);
 		            boton_der_1.setEnabled(true);
 		            act_ropa.setText("" + (act2 + 1) + "/" + (max2 + 1));
-		            name_Ropa.setText("" + categ.get(act).obtener_uno(act2));
+		            name_Ropa.setText("" + categ.get(act).obtener_uno(act2).getName());
 		            cam_Actual();
 		        }
 		    }
@@ -337,7 +352,7 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		            boton_der_1.setEnabled(true);
 		        }
 		        act_ropa.setText("" + (act2 + 1) + "/" + (max2 + 1));
-		        name_Ropa.setText("" + categ.get(act).obtener_uno(act2));
+		        name_Ropa.setText("" + categ.get(act).obtener_uno(act2).getName());
 		        cam_Actual();
 		    }
 		});
@@ -362,7 +377,7 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		            boton_izq_1.setEnabled(true);
 		        }
 		        act_ropa.setText("" + (act2 + 1) + "/" + (max2 + 1));
-		        name_Ropa.setText("" + categ.get(act).obtener_uno(act2));
+		        name_Ropa.setText("" + categ.get(act).obtener_uno(act2).getName());
 		        cam_Actual();
 		    }
 		});
@@ -382,18 +397,15 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		add(act_categ);
 		
 
+		
+
 		nu=new JLabel ();
 		String arc= ""+categ.get(act).getAtuendos().get(act2).getName_archivo();
 		nu.setIcon(imagenes.getUnota(arc,500,500));
 		labels.add(act, nu);
 		cam_Actual();
-		showing ();
-		
-		
-		
-		
-
-		
+		this.first_Adding() ;
+		//add_fondo(usa.getFondo());
 	//inicializar (x);
 		  /*try {
 				Bd_oracle basesita = new Bd_oracle ();
@@ -405,11 +417,11 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 			}
 		  */
 		 lblNewLabel_2.setText("" + puntaje);
+	
 		
 		
-		
-		
-		this.add_fondo(usa.getFondo());
+		 //add_fondo(usa.getFondo());
+
 	}
 	
 	
@@ -417,17 +429,21 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 	
 	
 	public void cam_Actual() {
+		
+		
 		nu = new JLabel();
+		curPrenda [act]= categ.get(act).getAtuendos().get(act2);
 		String arc = "" + categ.get(act).getAtuendos().get(act2).getName_archivo();
-		System.out.println(arc);
+		System.out.println("CurPrenda"+curPrenda [act]);
 		    labels.get(act).setIcon(imagenes.getUnota(arc, 500, 500));
 		    pun[act]=categ.get(act).getAtuendos().get(act2).getPuntaje();
-		    System.out.println(""+pun[act]);
-		contar ();
+		   // System.out.println(""+pun[act]);
+		    contar ();
 		    
 		lblNewLabel_2.setText(""+puntaje);
-		    
-		showing();
+		
+		
+		//showing();
 		repaint();
 		revalidate();
 		
@@ -442,17 +458,11 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		this.puntaje=puntitos;
 		return puntitos;
 	}
-	
-	
-	
-	
-	
+
 
 	
-	public void showing () {
-		int x=0;
-		for (int i=16;i>=0;i--) {
-			
+	public void first_Adding () {		
+		for (int i=16;i>=0;i--) {	
 			JLabel label = labels.get(i);
 			label.setVerticalAlignment(SwingConstants.CENTER);
 			label.setBorder(null);
@@ -460,7 +470,7 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 			add(label);
 		}	
 		
-		this.add_fondo(usa.getFondo());
+		add_fondo(usa.getFondo());
 	}
 	public void botonframe (JPanel b) {
 		removeAll();
@@ -469,64 +479,39 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		repaint();
 		revalidate();
 	}
+	
+	
 	public void llenar (String usuario) {
+		 
 		
-		this.categ.add(new Categoria("Cuerpo",0));
-		this.categ.add(new Categoria("Ojos",0));
-		this.categ.add(new Categoria("Cejas",0));
-		this.categ.add(new Categoria("Boca",0));
-		this.categ.add(new Categoria("Vello",0));
-		this.categ.add(new Categoria("Lentes",0));
-		this.categ.add(new Categoria("Peinado",0));
-		this.categ.add(new Categoria("Tatuaje",0));	
-		this.categ.add(new Categoria("Calcetas",0));
-		this.categ.add(new Categoria("Superior",0));
-		this.categ.add(new Categoria("Pantalon",0));
-		this.categ.add(new Categoria("Sombrero",0));
-		this.categ.add(new Categoria("Calzado",0));
-		this.categ.add(new Categoria("Piercing",0));
-		this.categ.add(new Categoria("Capa",0));
-		
-		if (usuario.equals("admin")){
-			
-		}
-		else {
-			System.out.println("usuario promedio");
-			
-				/*Bd_oracle basesita= new Bd_oracle ();
-				Bd_mongo mango = new Bd_mongo(usuario);
-				categ=basesita.items("cuerpo",categ,0);
-				categ=basesita.items_gesto("Ojos",categ,1,"descripcion");
-				categ=basesita.items_gesto("Cejas",categ,2,"descripccion");
-				categ=basesita.items_gesto("Boca",categ,3,"descripccion");
-				categ=basesita.items_gesto("Bello_facila",categ,4,"descripccion");
-				categ=basesita.itemPorClave("Lentes",categ,mango.leerClaves("LENTES"),5);
-				categ=basesita.itemPorClave("Peinado",categ,mango.leerClaves("PEINADO"),6);
-				categ=basesita.itemPorClave("Tatuaje",categ,mango.leerClaves("TATUAJE"),7);
-				categ=basesita.itemPorClave("Calcetas",categ,mango.leerClaves("CALCETAS"),8);
-				categ=basesita.itemPorClave("Vestido",categ,mango.leerClaves("VESTIDO"),9);
-				categ=basesita.itemPorClave("Top",categ,mango.leerClaves("TOP"),9);
-				categ=basesita.itemPorClave("Pantalon",categ,mango.leerClaves("PANTALON"),10);
-				categ=basesita.itemPorClave("Sombrero",categ,mango.leerClaves("SOMBRERO"),11);
-				
-				categ=basesita.itemPorClave("Calzado",categ,mango.leerClaves("CALZADO"),12);
+		Controlador_Prenda b=new Controlador_Prenda ();
+		Modelo_Mongo mongo = new Modelo_Mongo(usuario);
+		 categ.add(b.buscar_categ("Cuerpo"));
+		 categ.add(b.buscar_categ("Ojos"));
+		 categ.add(b.buscar_categ("Cejas"));
+		 categ.add(b.buscar_categ("Boca"));
 
-				categ=basesita.itemPorClave("Piercing",categ,mango.leerClaves("PIERCING"),13);
-				categ=basesita.itemPorClave("Capa",categ,mango.leerClaves("CAPA"),14);
-				
-				basesita.cerrarConexion();
-				*/
+		 categ=mongo.leerCateg("Vello", categ);
+		 categ=mongo.leerCateg("Lentes", categ);
+		 
+		 categ.add(b.buscar_categ("Peinado"));
+		 
+		 categ=mongo.leerCateg("Tatuaje", categ);
+		 categ=mongo.leerCateg("Calcetas", categ);
+		 categ=mongo.leerCateg("Top", categ);
+		 categ=mongo.leerCateg("Pantalon", categ);
+		 categ=mongo.leerCateg("Sombrero", categ);
+		 categ=mongo.leerCateg("Calzado", categ);
+		 categ=mongo.leerCateg("Piercing", categ);
+		 categ=mongo.leerCateg("Capa", categ);
+		
+	
 			
 			//inicio vacio plox poner 5 en el int x=0
-			for (int x = 0; x < 15; x++) {
+			for (int x = 4; x < 15; x++) {
 			    categ.get(x).getAtuendos().add(0, new Prenda(0,"Ninguno", "Ninguno", "vacio"));
-			   
 			}
 
-			
-		}
-		
-		
 		
 		for (int i=0;i<16;i++) {
 			JLabel nu=new JLabel ();
@@ -537,7 +522,7 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		
 		
 		
-		
+		inicializarCurPrenda ();
 
 	}
 }

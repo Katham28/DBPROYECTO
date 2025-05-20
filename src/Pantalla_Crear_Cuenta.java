@@ -20,6 +20,7 @@ public class Pantalla_Crear_Cuenta extends Pantalla_secundaria {
 	//private static final long serialVersionUID = 1L;
 	private JPasswordField passwordField_1;
 	private JTextField textField_1;
+	Imagen imagenes= new Imagen ();
 
 	public Pantalla_Crear_Cuenta(int num_fondo, int num_musica) {
 		super(num_fondo, num_musica);

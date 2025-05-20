@@ -42,13 +42,26 @@ private Modelo_Prenda modelo_prenda= Modelo_Prenda.getInstancia();
 	
 	public Categoria buscar_categ (String categ) {
 		Categoria categor= this.modelo_prenda.buscar_categ(categ);
-		
+		categor.setName(categ);
 		System.out.println(categor);
 		return categor;
 	}
 	
+	public int sacar_canti(String Categ) {
+		int re=0;
+		
+		re=this.modelo_prenda.sacar_canti(Categ);
+		return re;
+	}
+	
 	public void cargar_todo() {
 		modelo_prenda.cargar_todo();
+	}
+	
+	public Prenda obtenerPrendaPorCategoriaYFila(String categoria, int fila) {
+		Prenda b=modelo_prenda.obtenerPrendaPorCategoriaYFila(categoria, fila);
+		
+		return b;
 	}
 
 }

@@ -58,6 +58,19 @@ public class Imagen {
 		
 		return  unito;
 	}
+	
+	public ImageIcon getprenda(String name) {
+		ImageIcon uno;
+		ImageIcon unito;
+		try {
+			uno=new ImageIcon(getClass().getResource(""+name+".png"));
+			unito= new ImageIcon(uno.getImage().getScaledInstance(200, 230, 400));
+		} catch (Exception e) { // Excepción general para cualquier otro error
+			 unito= new ImageIcon(getClass().getResource("error.png"));
+		}
+		
+		return  unito;
+	}
 
 
 	public Imagen() {
