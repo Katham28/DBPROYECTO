@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class Modelo_Mongo {
     private MongoClient mongoClient;
     private MongoDatabase database;
-
+    private static Modelo_Mongo instance;
     public Modelo_Mongo(String usuario) {
         String uri = "mongodb+srv://Katham:Katia280704@cluster0.crmou.mongodb.net/\r\n"+ "";
         
@@ -39,6 +39,13 @@ public class Modelo_Mongo {
         } else {
             System.out.println("ERROR: no hay sesion por cerrar.");
         }
+    }
+    
+    public static synchronized Modelo_Mongo getInstance(String usuario) {
+        if (instance == null) {
+            instance = new Modelo_Mongo(usuario);
+        }
+        return instance;
     }
 
     public void guardarRopa(Prenda prenda, String tipo) {
@@ -127,11 +134,14 @@ public class Modelo_Mongo {
 
 
     public Prenda[] leerPersonaje(int ver) {
-        MongoCollection<Document> collection = database.getCollection("personajes");
-        Document doc = collection.find(eq("ver", ver)).first();
+    	System.out.println("buscando:"+ver);
+    	 MongoCollection<Document> collection = database.getCollection("personajes");
+    	 Document doc = collection.find(eq("ver", ver)).first();
 
         if (doc == null) {
             System.out.println("No se encontró un personaje con ver: " + ver);
+            
+            
             return null;
         }
 

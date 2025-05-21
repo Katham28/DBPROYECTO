@@ -45,17 +45,43 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 	private JLabel lblNewLabel_5;
 	private int ver;
 
-
-	public void inicializarCurPrenda () {
+	public int contar () {
+		int puntitos=0;
 		for (int i=0;i<15;i++) {
-			curPrenda [i]= categ.get(i).getAtuendos().get(0);
+			puntitos=this.curPrenda[i].getPuntaje()+puntitos;
 		}
-	
+		this.puntaje=puntitos;
+		return puntitos;
 	}
-	
-	public void iniciarlizar_personaje () {
+
+	public void inicializarCurPrenda (int ver) {
 		
+		 Modelo_Mongo mongo = new Modelo_Mongo(usa.getUser());
+		curPrenda=mongo.leerPersonaje(ver);
+		
+		if (curPrenda==null) {
+			curPrenda= new Prenda [15];
+			for (int i=0;i<15;i++) {
+				System.out.println("Reespaldo:"+i);;
+			    curPrenda [i]= categ.get(i).getAtuendos().get(0);
+			}
+		} 
+		puntaje=contar ();	    
+		lblNewLabel_2.setText(""+puntaje);
+		
+		//System.out.println("Imprimir al inicializar");
+		//this.imprimirCurPrenda();
+		for (int i=0;i<15;i++) {
+			String arc = "" + curPrenda[i].getName_archivo();
+			 labels.get(i).setIcon(imagenes.getUnota(arc, 500, 500));
+		}
+		
+		
+		repaint();
+		revalidate(); 
 	}
+	
+
 	
 	public void imprimirCurPrenda () {
 		System.out.println("curPrendas*******************");
@@ -403,10 +429,13 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		String arc= ""+categ.get(act).getAtuendos().get(act2).getName_archivo();
 		nu.setIcon(imagenes.getUnota(arc,500,500));
 		labels.add(act, nu);
+		
 		cam_Actual();
 		this.first_Adding() ;
 		//add_fondo(usa.getFondo());
 	//inicializar (x);
+		
+		
 		  /*try {
 				Bd_oracle basesita = new Bd_oracle ();
 				puntaje= basesita.saco_puntaje(usuario, puntaje,ver);
@@ -435,11 +464,10 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		curPrenda [act]= categ.get(act).getAtuendos().get(act2);
 		String arc = "" + categ.get(act).getAtuendos().get(act2).getName_archivo();
 		System.out.println("CurPrenda"+curPrenda [act]);
-		    labels.get(act).setIcon(imagenes.getUnota(arc, 500, 500));
-		    pun[act]=categ.get(act).getAtuendos().get(act2).getPuntaje();
+		labels.get(act).setIcon(imagenes.getUnota(arc, 500, 500));
+		    //pun[act]=categ.get(act).getAtuendos().get(act2).getPuntaje();
 		   // System.out.println(""+pun[act]);
-		    contar ();
-		    
+		puntaje=contar ();	    
 		lblNewLabel_2.setText(""+puntaje);
 		
 		
@@ -449,25 +477,17 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		
 	}
 	
-	public int contar () {
-		int puntitos=0;
-		for (int i=0;i<16;i++) {
-			puntitos=pun[i]+puntitos;
-			
-		}
-		this.puntaje=puntitos;
-		return puntitos;
-	}
 
 
 	
 	public void first_Adding () {		
 		for (int i=16;i>=0;i--) {	
-			JLabel label = labels.get(i);
-			label.setVerticalAlignment(SwingConstants.CENTER);
-			label.setBorder(null);
-			label.setBounds(450, 150, 444,400);
-			add(label);
+
+			labels.get(i).setVerticalAlignment(SwingConstants.CENTER);
+			labels.get(i).setBorder(null);
+			labels.get(i).setBounds(450, 150, 444,400);
+			
+			add(labels.get(i));
 		}	
 		
 		add_fondo(usa.getFondo());
@@ -521,8 +541,8 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		}
 		
 		
+		inicializarCurPrenda (num_per);
 		
-		inicializarCurPrenda ();
 
 	}
 }
