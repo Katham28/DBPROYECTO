@@ -17,6 +17,8 @@ public class Modelo_Correo {
     	codigos[0]="ZXM28";
     	codigos[1]="GLP39";
     	codigos[2]="YUI40";
+    	codigos[3]="DRE78";
+    	codigos[4]="NANAMI44";
     }
     
     public Modelo_Correo() {

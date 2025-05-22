@@ -458,6 +458,14 @@ public class Pantalla_Ajustes extends JPanel {
 					lblmensaje.setVisible(true);
 				}
 				else {
+					
+					if(chckbxNewCheckBox.isSelected() )
+					{
+					Modelo_Mongo mongo = new Modelo_Mongo (usa.getUser());
+					mongo.renombrarBaseDeDatos(usuario.getUser(), textField.getText());
+					}
+					
+					
 					//si seleccione checkbox y coinciden las contraseñas
 					usuario.setCorreo(textField_1.getText());
 					usuario.setPassword(passwordField.getText());
@@ -465,6 +473,9 @@ public class Pantalla_Ajustes extends JPanel {
 					
 					Controlador_Usuario basesita= new Controlador_Usuario ();
 					int re=basesita.actualizarUsuario(usuario);
+					
+					
+					
 					
 					if (re==0) {
 						botonframe (new Pantalla_Menu_Usuario(usuario));

@@ -41,6 +41,20 @@ public class Imagen {
 		return  unito;
 	}
 	
+	public ImageIcon getUnota2(String name,int j) {
+		ImageIcon uno;
+		ImageIcon unito;
+		try {
+			uno=new ImageIcon(getClass().getResource(""+name+".png"));
+			unito= new ImageIcon(uno.getImage().getScaledInstance(j, j, j));
+		} catch (Exception e) { // Excepción general para cualquier otro error
+			 unito= new ImageIcon(getClass().getResource("error.png"));
+		}
+		
+		return  unito;
+	}
+	
+	
 	public ImageIcon getfondo (String name) {
 		ImageIcon uno=new ImageIcon(getClass().getResource(""+name+".jpg"));
 		return  uno;

@@ -484,7 +484,12 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		first_disable ();
 		
 		
-		
+		JLabel ima = new JLabel();
+		ima.setVerticalAlignment(SwingConstants.CENTER);
+		ima.setIcon(imagenes.getUnota2("miadmin", 300));
+		ima.setBorder(null);
+		ima.setBounds(825, 148, 348, 360);
+		add(ima);
 		
 		
 		this.add_fondo(num_fondo);

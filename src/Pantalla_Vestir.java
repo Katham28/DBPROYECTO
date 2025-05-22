@@ -69,8 +69,8 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		puntaje=contar ();	    
 		lblNewLabel_2.setText(""+puntaje);
 		
-		//System.out.println("Imprimir al inicializar");
-		//this.imprimirCurPrenda();
+		System.out.println("Imprimir al inicializar");
+		this.imprimirCurPrenda();
 		for (int i=0;i<15;i++) {
 			String arc = "" + curPrenda[i].getName_archivo();
 			 labels.get(i).setIcon(imagenes.getUnota(arc, 500, 500));
@@ -103,7 +103,10 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 				
 		this.boton_ajustes(1,usa,usa.getFondo(),usa.getMusica());
 		
-
+		
+		
+		
+		
 		JButton boton_volver = new JButton("VOLVER");
 		boton_volver.setForeground(new Color(199, 21, 133));
 		boton_volver.setBounds(10, 10, 122, 27);
@@ -158,9 +161,7 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		    	if (puntaje==1)
 		    		puntaje=0;
 		    	
-	            if (!categ.get(act).getAtuendos().isEmpty() && act2 < categ.get(act).getAtuendos().size()) {
-	                curClaves[act] = categ.get(act).getAtuendos().get(act2).getClave();
-	            }
+	            
 
 		        // Print ver and curClaves array
 		        System.out.println("ver: " + ver);
@@ -352,6 +353,69 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		boton_der.setBounds(783, 77, 80, 21);
 		add(boton_der);
 		
+		JButton btninit=new JButton("Inicio");
+		btninit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				act=0;
+				act2=0;
+				boton_der.setEnabled(true);
+		        boton_izq.setEnabled(false);
+		        max2 = categ.get(act).getAtuendos().size() - 1;
+		        if (categ.get(0).getAtuendos().size()==0 ||categ.get(0).getAtuendos().size()==1) {
+		  			boton_izq_1.setEnabled(false);
+		  			boton_der_1.setEnabled(false);
+		  		}
+		  		else  {
+		  			boton_izq_1.setEnabled(false);
+		  			boton_der_1.setEnabled(true);
+		  		}
+		        
+		        act_ropa.setText("" + (act2 + 1) + "/" + (max2 + 1));
+		          name_Ropa.setText("" + categ.get(act).obtener_uno(act2).getName());
+		          act_categ.setText("" + (act + 1) + "/" + categ.size());
+			      lblNewLabel_1.setText("" + categ.get(act).getName());
+		        
+		        repaint ();
+		         revalidate();
+			}
+		});
+		btninit.setFont(new Font("Artifakt Element", Font.PLAIN, 14));
+		btninit.setForeground(new Color(199, 21, 133));
+		btninit.setBounds(187, 75, 122, 27);
+		btninit.setBackground(Color.PINK);
+		add(btninit);
+		
+		JButton btnfin=new JButton("Fin");
+		btnfin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				act=14;
+				act2=0;
+				max2 = categ.get(act).getAtuendos().size() - 1;
+				  boton_der.setEnabled(false);
+		          boton_izq.setEnabled(true);
+		          
+		          if (categ.get(14).getAtuendos().size()==0 ||categ.get(14).getAtuendos().size()==1) {
+		  			boton_izq_1.setEnabled(false);
+		  			boton_der_1.setEnabled(false);
+		  		}
+		  		else  {
+		  			boton_izq_1.setEnabled(false);
+		  			boton_der_1.setEnabled(true);
+		  		}
+		          act_ropa.setText("" + (act2 + 1) + "/" + (max2 + 1));
+		          name_Ropa.setText("" + categ.get(act).obtener_uno(act2).getName());
+		          act_categ.setText("" + (act + 1) + "/" + categ.size());
+			      lblNewLabel_1.setText("" + categ.get(act).getName());
+		         repaint ();
+		         revalidate();
+			}
+		});
+		btnfin.setForeground(new Color(199, 21, 133));
+		btnfin.setFont(new Font("Artifakt Element", Font.PLAIN, 14));
+		btnfin.setBounds(900, 75, 122, 27);
+		btnfin.setBackground(Color.PINK);
+		add(btnfin);
+		
 
 		boton_izq_1.setEnabled(false);
 		if (categ.get(0).getAtuendos().size()==0 ||categ.get(0).getAtuendos().size()==1) {
@@ -424,14 +488,8 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		
 
 		
-
-		nu=new JLabel ();
-		String arc= ""+categ.get(act).getAtuendos().get(act2).getName_archivo();
-		nu.setIcon(imagenes.getUnota(arc,500,500));
-		labels.add(act, nu);
+		//cam_Actual();
 		
-		cam_Actual();
-		this.first_Adding() ;
 		//add_fondo(usa.getFondo());
 	//inicializar (x);
 		
@@ -446,14 +504,22 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 			}
 		  */
 		 lblNewLabel_2.setText("" + puntaje);
-	
+		 this.first_Adding();
 		
 		
 		 //add_fondo(usa.getFondo());
 
 	}
 	
-	
+	public void showing () {
+		int x=0;
+		for (int i=15;i>=0;i--) {
+			
+			
+		}	
+		
+		
+	}
 	
 	
 	
@@ -481,12 +547,7 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 
 	
 	public void first_Adding () {		
-		for (int i=16;i>=0;i--) {	
-
-			labels.get(i).setVerticalAlignment(SwingConstants.CENTER);
-			labels.get(i).setBorder(null);
-			labels.get(i).setBounds(450, 150, 444,400);
-			
+		for (int i=15;i>=0;i--) {	
 			add(labels.get(i));
 		}	
 		
@@ -535,9 +596,10 @@ public class Pantalla_Vestir extends Pantalla_secundaria {
 		
 		for (int i=0;i<16;i++) {
 			JLabel nu=new JLabel ();
+			nu.setVerticalAlignment(SwingConstants.CENTER);
+			nu.setBorder(null);
+			nu.setBounds(450, 150, 444,400);
 			labels.add(nu);
-			
-			pun[i]=0;
 		}
 		
 		

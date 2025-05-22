@@ -133,7 +133,7 @@ public class Pantalla_Iniciar_Sesion_Admin extends Pantalla_secundaria{
 
 			JLabel ima = new JLabel();
 			ima.setVerticalAlignment(SwingConstants.CENTER);
-			ima.setIcon(imagenes.getUnotam(4,400, 430, 600));
+			ima.setIcon(imagenes.getUnota2("miadmin", 400));
 			ima.setBorder(null);
 			ima.setBounds(161, 161, 444, 449);
 			add(ima);

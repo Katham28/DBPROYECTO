@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
@@ -38,10 +39,18 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		String musi []= new String [2];
+		musi[0]="src/musica2.wav";
+		musi[1]="src/musica1.wav";
+		
+		Random random = new Random();
+		int nr= random.nextInt(2); // 0 o 1
+		
+		Musica.playMusic(musi[nr]);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1122, 650);
-		int num_fondo=1;  //
+		int num_fondo=3;  //
 		int num_musica=1;
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

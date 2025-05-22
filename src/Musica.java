@@ -4,11 +4,13 @@ import java.io.IOException;
 
 public class Musica {
 
+    private static Clip clip; // Make clip a class field so we can control it later
+
     public static void playMusic(String filepath) {
         try {
             File audioFile = new File(filepath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioStream);
 
             // Reproducir en bucle
@@ -17,14 +19,24 @@ public class Musica {
 
             System.out.println("Reproduciendo música de fondo...");
 
-            // Mantener el programa abierto hasta que el usuario presione Enter
-            System.out.println("Presiona ENTER para detener la música.");
-            System.in.read();
+            // Wait while the music plays (or add controls to stop it)
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                if (clip != null) {
+                    clip.stop();
+                    clip.close();
+                }
+            }));
 
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println("ERROR REPRODUCIENDO MUSICA: " + e.getMessage());
+        }
+    }
+
+    public static void stopMusic() {
+        if (clip != null && clip.isRunning()) {
             clip.stop();
             clip.close();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+            System.out.println("Música detenida.");
         }
     }
 

@@ -62,6 +62,12 @@ public class Pantalla_Menu_Admin extends JPanel{
 		botton_items.setBounds(468, 439, 217, 40);
 		add(botton_items);
 		
+		JLabel ima = new JLabel();
+		ima.setVerticalAlignment(SwingConstants.CENTER);
+		ima.setIcon(imagenes.getUnota2("miadmin", 400));
+		ima.setBorder(null);
+		ima.setBounds(370, 6, 348, 360);
+		add(ima);
 		
 		
 		this.add_fondo(num_fondo);

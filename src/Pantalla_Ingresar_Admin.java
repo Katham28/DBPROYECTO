@@ -16,7 +16,7 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 
 
 	private static final long serialVersionUID = 1L;
-	protected Imagen imagenes= new Imagen (5);
+	protected Imagen imagenes= new Imagen (5);	 
 	protected String fuente= "Niagara Engraved";
 	JLabel fondo;
 	JButton boton_conf = new JButton("AJUSTES");
@@ -221,6 +221,15 @@ public class Pantalla_Ingresar_Admin extends JPanel {
 		lblNewLabel_11.setBackground(Color.BLACK);
 		lblNewLabel_11.setBounds(507, 310, 208, 33);
 		add(lblNewLabel_11);
+		
+		
+		
+		JLabel ima = new JLabel();
+		ima.setVerticalAlignment(SwingConstants.CENTER);
+		ima.setIcon(imagenes.getUnota2("miadmin", 300));
+		ima.setBorder(null);
+		ima.setBounds(825, 148, 348, 360);
+		add(ima);
 		this.add_fondo(num_fondo);
 		//this.boton_ajustes(0,new Usuario (),num_fondo,num_musica);
 	}

@@ -5,10 +5,12 @@ import static com.mongodb.client.model.Filters.lt;
 
 import org.bson.Document;
 
+import com.mongodb.MongoNamespace;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.ReplaceOptions;
 
 import java.time.Instant;
@@ -210,4 +212,40 @@ public class Modelo_Mongo {
         categ.add(cat);
         return categ;
     }
+    
+  
+
+    
+    public void renombrarBaseDeDatos(String nombreActualBD,  String nuevoNombreBD) {
+    	System.out.println("cambiando name bd");    
+    	// 1. Verificar si la BD actual existe
+    	    if (!mongoClient.listDatabaseNames().into(new java.util.ArrayList<>()).contains(nombreActualBD)) {
+    	        System.out.println("La base de datos '" + nombreActualBD + "' no existe.");
+    	        return;
+    	    }
+
+    	    // 2. Verificar si la nueva BD ya existe (para evitar sobrescribir)
+    	    if (mongoClient.listDatabaseNames().into(new java.util.ArrayList<>()).contains(nuevoNombreBD)) {
+    	        System.out.println("Ya existe una base de datos con el nombre '" + nuevoNombreBD + "'.");
+    	        return;
+    	    }
+
+    	    // 3. Copiar la BD actual a la nueva (MongoDB no permite renombrar directamente)
+    	    MongoDatabase bdActual = mongoClient.getDatabase(nombreActualBD);
+    	    MongoDatabase bdNueva = mongoClient.getDatabase(nuevoNombreBD);
+
+    	    // Copiar todas las colecciones de la BD actual a la nueva
+    	    for (String nombreColeccion : bdActual.listCollectionNames()) {
+    	        bdActual.getCollection(nombreColeccion)
+    	                .aggregate(java.util.Collections.emptyList())
+    	                .forEach(doc -> bdNueva.getCollection(nombreColeccion).insertOne(doc));
+    	    }
+
+    	    // 4. Eliminar la BD antigua (opcional)
+    	     bdActual.drop();
+
+    	    System.out.println("Base de datos renombrada de '" + nombreActualBD + "' a '" + nuevoNombreBD + "'.");
+    	}
+
+
 }
