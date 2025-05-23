@@ -388,6 +388,7 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 
 		            // Creación de objetos
 		            Prenda g = new Prenda();
+		           
 		            Controlador_Prenda b = new Controlador_Prenda();
 
 		            // Seteo de datos en la prenda
@@ -399,12 +400,16 @@ public class Pantalla_Mod_Eli_Admin extends JPanel {
 		            int re=0;
 		             b = new Controlador_Prenda();
 		             re=b.modificar_Prenda(g, comboBox.getSelectedItem().toString());
-
+		             g.anadir_llenar_todos();//añado observadoressssssssss
 		            if (re !=-1) {
 		             
 		                first_disable();
 						lblmensaje2.setText("Prenda modificada correctamente");
 						lblmensaje2.setVisible(true);
+						
+						
+						
+						g.actualizar_todos(g, comboBox.getSelectedItem().toString());
 						
 		               // botonframe(new Pantalla_Menu_Admin(num_fondo, num_musica));
 		            } else {

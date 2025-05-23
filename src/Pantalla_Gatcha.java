@@ -160,6 +160,7 @@ public class Pantalla_Gatcha extends Pantalla_secundaria {
 
 	        boton_girar.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
+	            	//boton_girar.setText("cargando");
 	            	
 	            	//Saco una categ random
 	            	  Random rand = new Random();

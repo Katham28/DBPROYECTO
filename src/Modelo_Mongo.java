@@ -5,6 +5,7 @@ import static com.mongodb.client.model.Filters.lt;
 
 import org.bson.Document;
 
+import com.mongodb.MongoException;
 import com.mongodb.MongoNamespace;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -12,6 +13,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.ReplaceOptions;
+import com.mongodb.client.result.UpdateResult;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import java.util.stream.Collectors;
 public class Modelo_Mongo {
     private MongoClient mongoClient;
     private MongoDatabase database;
-    private static Modelo_Mongo instance;
+    private static Modelo_Mongo instancia;
     public Modelo_Mongo(String usuario) {
         String uri = "mongodb+srv://Katham:Katia280704@cluster0.crmou.mongodb.net/\r\n"+ "";
         
@@ -34,6 +36,19 @@ public class Modelo_Mongo {
         System.out.println("Connected to database: " + dbName);
     }
 
+	public static Modelo_Mongo getInstancia (String usuario) {
+		if (instancia==null) {
+			instancia=new Modelo_Mongo(usuario);
+		}
+		
+			return instancia;
+		}
+	
+	public void set_Mongodatabase(String usuario) {
+		  database = mongoClient.getDatabase(usuario);
+	}
+	
+	
     public void cerrarConexion() {
         if (mongoClient != null) {
             mongoClient.close();
@@ -43,12 +58,6 @@ public class Modelo_Mongo {
         }
     }
     
-    public static synchronized Modelo_Mongo getInstance(String usuario) {
-        if (instance == null) {
-            instance = new Modelo_Mongo(usuario);
-        }
-        return instance;
-    }
 
     public void guardarRopa(Prenda prenda, String tipo) {
         MongoCollection<Document> collection = database.getCollection(tipo);
@@ -247,5 +256,48 @@ public class Modelo_Mongo {
     	    System.out.println("Base de datos renombrada de '" + nombreActualBD + "' a '" + nuevoNombreBD + "'.");
     	}
 
+    
+    public int actualizar_prenda(Prenda prenda, String usuario,String categoria) {
+        int re = 0;
+        
+        try {
+           
+            System.out.println("Connected to database: " + usuario);
+            // Get the collection with the category name
+            // 1. Conexión fija a "Planti" y colección "Pantalon"
+            database = mongoClient.getDatabase(usuario);
+            MongoCollection<Document> collection = database.getCollection(categoria);
+            
+            // 2. Filtro: Buscar SOLO por "name" (único identificador)
+            Document query = new Document("name", prenda.getName());
+            
+            // 3. Campos a actualizar (ignorando "name" porque es inmutable)
+            Document updates = new Document()
+                .append("name_archivo", prenda.getName_archivo())
+                .append("puntaje", prenda.getPuntaje())
+                .append("descripcion", prenda.getDescripcion());
+            
+            // 4. Ejecutar actualización (no reemplazar todo el documento)
+            UpdateResult result = collection.updateOne(
+                query, 
+                new Document("$set", updates)  // Solo modifica los campos especificados
+            );
+            
+            
 
+            // 5. Resultado
+            re = result.getModifiedCount() > 0 ? 1 : 0;
+            System.out.println(re == 1 ? "Campos actualizados correctamente" 
+                                     : "No se modificó (¿name no existe?)");
+            
+        } catch (MongoException e2) {
+            //System.err.println("Error de MongoDB al actualizar la prenda: " + e2.getMessage());
+            re = 0; // Error
+        } catch (Exception e) {
+            System.err.println("Error inesperado al actualizar la prenda: " + e.getMessage());
+            re = -1; // Error
+        }
+        
+        return re;
+    }
 }

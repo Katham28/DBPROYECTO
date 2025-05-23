@@ -116,6 +116,7 @@ public class Pantalla_Iniciar_Sesion extends Pantalla_secundaria{
 					else {
 						lblNewLabel_2.setVisible(false);
 						lblNewLabel_2.setOpaque(false);
+						boton_iniciarsesion.setText("cargando");
 						botonframe (new Pantalla_Menu_Usuario (b));
 					}
 					

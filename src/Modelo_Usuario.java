@@ -192,6 +192,44 @@ public class Modelo_Usuario {
 		return null;
 	}
 	
+	
+	public LinkedList <Observador> buscarTodosUsuarios  () {
+		String sql= "SELECT * FROM Usuario ";
+		PreparedStatement consulta=null;
+		ResultSet resultado=null;
+		
+		try {
+			
+		consulta= connect.prepareStatement(sql);
+		 resultado=consulta.executeQuery ();
+		 LinkedList <Observador> observadores = new LinkedList <Observador>();
+		 
+		 while (resultado.next()) {
+			 Usuario b=new Usuario ();
+				b.setUser(resultado.getString("user"));
+				observadores.add( b);
+			
+			
+		 }
+		 
+		 return observadores;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERROR buscando Usuario");
+			e.printStackTrace();
+		}
+		finally {
+				try {
+					if (resultado != null) resultado.close();
+					 if (consulta != null) consulta.close();
+				} catch (SQLException e) {
+					System.out.println("ERROR CERRANDO");
+				}
+		}
+		
+		return null;
+	}
+	
 	public void cambiar_fondo (int cve_usuario,int fondo) {
 		String sql= "UPDATE Usuario set num_fondo=? where cve_usuario=?";
 		

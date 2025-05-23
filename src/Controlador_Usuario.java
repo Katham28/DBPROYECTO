@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 
 public class Controlador_Usuario {
 	private Modelo_Usuario modelo_usuario= Modelo_Usuario.getInstancia();
@@ -51,5 +52,7 @@ public class Controlador_Usuario {
 		//modelo_usuario.cerrarConexion();
 	//}
 	
-
+	public LinkedList <Observador> buscarTodosUsuarios  (){
+		return modelo_usuario.buscarTodosUsuarios();
+	}
 }

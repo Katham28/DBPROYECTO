@@ -1,5 +1,5 @@
 
-public class Usuario {
+public class Usuario implements Observador {
 	
 	private String user;
 	private String password;
@@ -102,6 +102,16 @@ public class Usuario {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+
+	@Override
+	public int actualizar(Prenda prenda, String clase) {
+		
+		Controlador_Mongo mongo= new Controlador_Mongo (this.user);
+		return  mongo.actualizar_prenda(prenda, this.user,clase);
+
+		
 	}
 
 }

@@ -463,6 +463,7 @@ public class Pantalla_Ajustes extends JPanel {
 					{
 					Modelo_Mongo mongo = new Modelo_Mongo (usa.getUser());
 					mongo.renombrarBaseDeDatos(usuario.getUser(), textField.getText());
+					mongo.cerrarConexion();
 					}
 					
 					

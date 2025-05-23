@@ -1,6 +1,6 @@
 import javax.swing.ImageIcon;
 
-public class Prenda {
+public class Prenda extends Sujeto{
 	
 	public Prenda(String name) {
 		super();
