@@ -1,0 +1,82 @@
+package main.java;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import javax.swing.JMenuBar;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Random;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+
+public class Main extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Main frame = new Main();
+					frame.setVisible(true);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Main() {
+		String musi []= new String [2];
+		musi[0]="src/main/java/musica2.wav";
+		musi[1]="src/main/java/musica1.wav";
+		
+		Random random = new Random();
+		int nr= random.nextInt(2); // 0 o 1
+		
+		Musica.playMusic(musi[nr]);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1122, 650);
+		int num_fondo=3;  //
+		int num_musica=1;
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		//contentPane = new principal_(num);
+		contentPane = new Pantalla_Menu_principal (num_fondo,num_musica);
+		contentPane.setBackground(new Color(199, 21, 133));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		//System.out.println("Buscando icono en: " + new File("src/main/java/iconapp.png").getAbsolutePath());
+		//System.out.println("Existe el icono: " + new File("src/main/java/iconapp.png").exists());
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/iconapp.png"));
+
+	
+
+	}
+	
+
+	
+
+}
